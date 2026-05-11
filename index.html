@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Slideshow Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Video Slideshow Generator</h1>
+            <p>Buat video dari gambar, teks, dan musik secara mudah!</p>
+        </header>
+
+        <main>
+            <!-- Step 1: Upload Gambar -->
+            <section class="step" id="step-images">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <h2>Upload Gambar</h2>
+                </div>
+                <div class="upload-area" id="dropZone">
+                    <div class="upload-icon">📷</div>
+                    <p>Drag & drop gambar di sini atau <label for="imageInput" class="browse-btn">pilih file</label></p>
+                    <input type="file" id="imageInput" multiple accept="image/*" hidden>
+                    <small>Format: JPG, PNG, GIF | Maks 20 gambar</small>
+                </div>
+                <div class="image-preview" id="imagePreview"></div>
+            </section>
+
+            <!-- Step 2: Tambah Teks -->
+            <section class="step" id="step-text">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <h2>Tambah Teks</h2>
+                </div>
+                <div class="text-options">
+                    <div class="form-group">
+                        <label for="slideText">Teks untuk slide (per baris = per slide)</label>
+                        <textarea id="slideText" rows="5" placeholder="Baris 1: Teks untuk gambar 1&#10;Baris 2: Teks untuk gambar 2&#10;..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fontSelect">Font</label>
+                            <select id="fontSelect">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Impact">Impact</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fontSize">Ukuran</label>
+                            <select id="fontSize">
+                                <option value="24">Kecil</option>
+                                <option value="32" selected>Sedang</option>
+                                <option value="48">Besar</option>
+                                <option value="64">Sangat Besar</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fontColor">Warna Teks</label>
+                            <input type="color" id="fontColor" value="#ffffff">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textPosition">Posisi Teks</label>
+                        <select id="textPosition">
+                            <option value="top">Atas</option>
+                            <option value="center">Tengah</option>
+                            <option value="bottom" selected>Bawah</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Musik -->
+            <section class="step" id="step-music">
+                <div class="step-header">
+                    <span class="step-number">3</span>
+                    <h2>Pilih Musik</h2>
+                </div>
+                <div class="music-options">
+                    <div class="form-group">
+                        <label for="musicInput">Upload musik (MP3/WAV)</label>
+                        <input type="file" id="musicInput" accept="audio/*">
+                    </div>
+                    <div class="music-player" id="musicPlayer" style="display:none;">
+                        <audio id="audioPreview" controls></audio>
+                        <button class="btn btn-small btn-danger" id="removeMusic">Hapus Musik</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Pengaturan -->
+            <section class="step" id="step-settings">
+                <div class="step-header">
+                    <span class="step-number">4</span>
+                    <h2>Pengaturan Video</h2>
+                </div>
+                <div class="settings-options">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="slideDuration">Durasi per Slide (detik)</label>
+                            <input type="range" id="slideDuration" min="1" max="10" value="3">
+                            <span id="durationValue">3 detik</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="transition">Efek Transisi</label>
+                            <select id="transition">
+                                <option value="fade">Fade</option>
+                                <option value="slide-left">Slide Kiri</option>
+                                <option value="slide-right">Slide Kanan</option>
+                                <option value="zoom">Zoom</option>
+                                <option value="none">Tanpa Transisi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="videoResolution">Resolusi Video</label>
+                        <select id="videoResolution">
+                            <option value="720">720p (1280x720)</option>
+                            <option value="1080" selected>1080p (1920x1080)</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview & Generate -->
+            <section class="step" id="step-generate">
+                <div class="step-header">
+                    <span class="step-number">5</span>
+                    <h2>Preview & Generate</h2>
+                </div>
+                <div class="preview-area">
+                    <canvas id="previewCanvas" width="1920" height="1080"></canvas>
+                    <div class="preview-controls">
+                        <button class="btn btn-secondary" id="btnPreview">▶ Preview Slideshow</button>
+                        <button class="btn btn-primary" id="btnGenerate">🎬 Generate Video</button>
+                    </div>
+                </div>
+                <div class="progress-bar" id="progressBar" style="display:none;">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+                <div id="downloadSection" style="display:none;">
+                    <a class="btn btn-success" id="downloadLink">⬇ Download Video</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Video Slideshow Generator &copy; 2026 | Dibuat dengan HTML, CSS & JavaScript</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
