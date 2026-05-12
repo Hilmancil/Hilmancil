@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blox Hangout - Voice Chat Island</title>
+    <title>Gunung Blox - Mountain Adventure</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Loading Screen -->
     <div id="loadingScreen">
         <div class="logo">
-            <span>BLOX</span>
-            <span class="accent">HANGOUT</span>
+            <span>GUNUNG</span>
+            <span class="accent">BLOX</span>
         </div>
-        <div class="tagline">Voice Chat Island</div>
+        <div class="tagline">Mountain Adventure Map</div>
         <div class="loader"><div class="loader-fill"></div></div>
-        <div class="loading-text">Membangun dunia...</div>
+        <div class="loading-text">Mempersiapkan pendakian...</div>
     </div>
 
     <!-- Main Game UI -->
@@ -28,11 +28,15 @@
             <div id="topBar">
                 <div class="hud-pill brand">
                     <span class="dot"></span>
-                    <span>BLOX HANGOUT</span>
+                    <span>GUNUNG BLOX</span>
                 </div>
                 <div class="hud-pill" id="zoneInfo">
-                    <span id="zoneIcon">🌴</span>
-                    <span id="zoneName">Spawn Plaza</span>
+                    <span id="zoneIcon">⛺</span>
+                    <span id="zoneName">Base Camp</span>
+                </div>
+                <div class="hud-pill" id="altitudePill">
+                    <span>⛰️</span>
+                    <span id="altitudeValue">0 m</span>
                 </div>
                 <div class="hud-pill" id="timeInfo">
                     <span id="timeIcon">☀️</span>
@@ -42,11 +46,11 @@
 
             <!-- Player list -->
             <div id="playerList">
-                <div class="panel-title">Di Pulau (5)</div>
+                <div class="panel-title">Tim Pendaki (5)</div>
                 <div class="player-item self">
                     <div class="avatar-mini you"></div>
                     <span class="player-name">You</span>
-                    <span class="mic-indicator on" title="Mic aktif">🎤</span>
+                    <span class="mic-indicator on" title="Radio aktif">📻</span>
                 </div>
                 <div class="player-item">
                     <div class="avatar-mini c1"></div>
@@ -56,7 +60,7 @@
                 <div class="player-item">
                     <div class="avatar-mini c2"></div>
                     <span class="player-name">Rio</span>
-                    <span class="mic-indicator on">🎤</span>
+                    <span class="mic-indicator on">📻</span>
                 </div>
                 <div class="player-item">
                     <div class="avatar-mini c3"></div>
@@ -72,13 +76,13 @@
 
             <!-- Bottom controls -->
             <div id="bottomBar">
-                <button class="control-btn" id="btnMic" title="Mikrofon (M)">
-                    <span class="icon">🎤</span>
-                    <span class="label">Mic ON</span>
+                <button class="control-btn" id="btnMic" title="Radio (M)">
+                    <span class="icon">📻</span>
+                    <span class="label">Radio ON</span>
                 </button>
                 <button class="control-btn" id="btnDance" title="Menari (E)">
                     <span class="icon">💃</span>
-                    <span class="label">Dance</span>
+                    <span class="label">Celebrate</span>
                 </button>
                 <button class="control-btn" id="btnWave" title="Melambai (Q)">
                     <span class="icon">👋</span>
@@ -100,12 +104,13 @@
                 <div><kbd>SPACE</kbd> Lompat</div>
                 <div><kbd>SHIFT</kbd> Lari</div>
                 <div><kbd>Mouse</kbd> Putar kamera</div>
+                <div><kbd>Scroll</kbd> Zoom</div>
             </div>
 
             <!-- Proximity voice indicator -->
             <div id="voiceIndicator">
                 <div class="voice-wave"><span></span><span></span><span></span><span></span></div>
-                <div class="voice-text">Proximity voice aktif</div>
+                <div class="voice-text">Radio pendaki aktif</div>
             </div>
 
             <!-- Chat bubble (emotes) -->
